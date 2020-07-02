@@ -28,6 +28,13 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(48, items[0].quality)
+    
+    def test_negative_quality(self):
+        items = [Item("not Sulfuras", -1, 0)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(0, items[0].quality)
+
 
     
 
