@@ -22,6 +22,13 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(49, items[0].sell_in)
+
+    def test_quality_after_sell_date_expares(self):
+        items = [Item("not Sulfuras", -1, 50), Item("Sulfuras, Hand of Ragnaros", 50, 50)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(48, items[0].quality)
+
     
 
 if __name__ == '__main__':
