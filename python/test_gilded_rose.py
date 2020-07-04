@@ -43,6 +43,12 @@ class GildedRoseTest(unittest.TestCase):
         # self.assertEqual(11, items[0].quality)
         for item in range(len(items)):
             self.assertTrue(50 >= items[item].quality)
+    
+    def test_repr_of_item(self):
+        item = Item("Name", 50, 60)
+        self.assertEqual(str(item), "Name, 50, 60")
+    
+    
 
 if __name__ == '__main__':
     unittest.main()
