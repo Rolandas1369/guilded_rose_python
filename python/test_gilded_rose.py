@@ -79,16 +79,14 @@ class GildedRoseTest(unittest.TestCase):
         for item in range(len(items)):
             self.assertEqual(items[item].quality, 21)
     
-    def test_what_all_items_quality_increses_after_daay(self):
-        names_list = ['Backstage passes to a TAFKAL80ETC concert', 'Aged Brie']
+    def test_then_item_sell_in_negative(self):
+        
+        items = [Item("Aged Brie", -2, 10)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(items[0].quality, 12)
+        
 
-
-        for item in range(len(names_list)):
-            for i in range(1,2):
-                items = [Item(name, -2, i) for name in names_list]
-                gilded_rose = GildedRose(items)
-                gilded_rose.update_quality()
-                self.assertEqual(items[item].quality, 0)
 
 
 if __name__ == '__main__':
