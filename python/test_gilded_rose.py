@@ -1,49 +1,49 @@
 # -*- coding: utf-8 -*-
+# Will separate each test for each decision
 import unittest
 
 from gilded_rose import Item, GildedRose
 
 class GildedRoseTest(unittest.TestCase):
-    def test_foo(self):
-        items = [Item("foo", 0, 0)]
+
+    def test_quality_decreases_by_1(self):
+        names_list = ['+5 Dexterity Vest', "Elixir of the Mongoose"
+        , "Conjured Mana Cake"]
+        items = [Item(name, 45, 45) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual("foo", items[0].name)
-
-    def test_check_quantity(self):
-        items = [Item("not Sulfuras", 50, 50), Item("Sulfuras, Hand of Ragnaros", 50, 50)]
-        gilded_rose = GildedRose(items)
-        gilded_rose.check_quantity(items[0])
-        self.assertEqual(49, items[0].quality)
-        self.assertEqual(50, items[1].quality)
+        for item in range(len(items)):
+            self.assertEqual(44, items[item].quality)
     
-    def test_sell_in(self):
-        items = [Item("not Sulfuras", 50, 50), Item("Sulfuras, Hand of Ragnaros", 50, 50)]
+    def test_sell_in_decreases_by_1(self):
+        names_list = ['+5 Dexterity Vest', "Elixir of the Mongoose",
+        "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
+        items = [Item(name, 45, 45) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual(49, items[0].sell_in)
-
-    def test_quality_after_sell_date_expares(self):
-        items = [Item("not Sulfuras", -1, 50), Item("Sulfuras, Hand of Ragnaros", 50, 50)]
-        gilded_rose = GildedRose(items)
-        gilded_rose.update_quality()
-        self.assertEqual(48, items[0].quality)
+        for item in range(len(items)):
+            self.assertEqual(44, items[item].sell_in)
     
-    def test_negative_quality(self):
-        items = [Item("not Sulfuras", -1, 0)]
+    def test_negative_sell_in_returns_0(self):
+        names_list = ['+5 Dexterity Vest', "Elixir of the Mongoose",
+         "Sulfuras, Hand of Ragnaros", "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
+        items = [Item(name, -1, 0) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual(0, items[0].quality)
+        for item in range(len(items)):
+            self.assertEqual(0, items[item].quality)
+        
 
-    def test_aged_brie_value(self):
-        names_list = ['+5 Dexterity Vest', 'Aged Brie', "Elixir of the Mongoose", "Sulfuras, Hand of Ragnaros", "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
+    def test_quality_cant_increase_more_than_50(self):
+        names_list = ['+5 Dexterity Vest', 'Aged Brie', "Elixir of the Mongoose",
+         "Sulfuras, Hand of Ragnaros", "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
         items = [Item(name, 50, 50) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         for item in range(len(items)):
             self.assertTrue(50 >= items[item].quality)
     
-    def test_repr_of_item(self):
+    def test_representation_of_item(self):
         item = Item("Name", 50, 60)
         self.assertEqual(str(item), "Name, 50, 60")
     
@@ -59,28 +59,19 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality() 
         self.assertEqual(12, items[0].quality)
     
-    def test_backstage_value_at_day_below_four(self):
+    def test_backstage_value_at_day_below_six(self):
         items = [Item("Backstage passes to a TAFKAL80ETC concert", 3, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality() 
         self.assertEqual(13, items[0].quality)
     
-    def test_backstage_expares_at_day_zero(self):
+    def test_backstage_at_day_zero(self):
         items = [Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality() 
         self.assertEqual(0, items[0].quality)
-
-    def test_what_all_items_quality_increses_after_day(self):
-        names_list = ['Aged Brie']
-        items = [Item(name, 20, 20) for name in names_list]
-        gilded_rose = GildedRose(items)
-        gilded_rose.update_quality()
-        for item in range(len(items)):
-            self.assertEqual(items[item].quality, 21)
     
-    def test_then_item_sell_in_negative(self):
-        
+    def test_aged_bried_sell_in_is_negative(self):
         items = [Item("Aged Brie", -2, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()

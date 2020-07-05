@@ -2,6 +2,8 @@
 # 1. replace to shorthand lines item.quality = item.quality - 1
 # 2. One function was moved before testing.
 # 3. After a consideration I need to test code 100% before refractoring.
+# 4. After test 100% pass, I need to refactor tests.
+
 class GildedRose(object):
 
     def __init__(self, items):
