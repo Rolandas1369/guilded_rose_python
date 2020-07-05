@@ -40,7 +40,6 @@ class GildedRoseTest(unittest.TestCase):
         items = [Item(name, 50, 50) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        # self.assertEqual(11, items[0].quality)
         for item in range(len(items)):
             self.assertTrue(50 >= items[item].quality)
     
@@ -71,7 +70,26 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality() 
         self.assertEqual(0, items[0].quality)
+
+    def test_what_all_items_quality_increses_after_day(self):
+        names_list = ['Aged Brie']
+        items = [Item(name, 20, 20) for name in names_list]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        for item in range(len(items)):
+            self.assertEqual(items[item].quality, 21)
     
+    def test_what_all_items_quality_increses_after_daay(self):
+        names_list = ['Backstage passes to a TAFKAL80ETC concert', 'Aged Brie']
+
+
+        for item in range(len(names_list)):
+            for i in range(1,2):
+                items = [Item(name, -2, i) for name in names_list]
+                gilded_rose = GildedRose(items)
+                gilded_rose.update_quality()
+                self.assertEqual(items[item].quality, 0)
+
 
 if __name__ == '__main__':
     unittest.main()
