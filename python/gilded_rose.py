@@ -20,14 +20,26 @@ class GildedRose(object):
         item.sell_in -= 1
         return item.sell_in
 
+    def update_aged_brie(self, item):
+        if item.sell_in < 0:
+            item.quality += 2
+        else:
+            item.quality += 1
+        return item.quality
+
     def update_quality(self):
 
         for item in self.items:
-            self.decrease_quality(item)
-            self.decrease_sell_in(item)
+            print("namo", item.name)
+            if item.name in ['+5 Dexterity Vest', "Elixir of the Mongoose", "Conjured Mana Cake"]:
+                print("name is in this")
+                self.decrease_sell_in(item)
+                self.decrease_quality(item)
+
+            if item.name == 'Aged Brie':
+                self.update_aged_brie(item)
 
     def update_item(self):
-
         print('ok')
 
 
