@@ -4,6 +4,7 @@
 # 3. After a consideration I need to test code 100% before refractoring.
 # 4. After test 100% pass, I need to refactor tests.
 # 5. After doing this refactoring a little bit I think in this case rewriting all update quality is good
+# 6. Most of code are in functions, not fully tested functionality, need improvement to 100% test coverage
 
 
 class GildedRose(object):
@@ -24,7 +25,6 @@ class GildedRose(object):
         return item.quality
 
     def decrease_sell_in(self, item):
-
         item.sell_in -= 1
         return item.sell_in
 
