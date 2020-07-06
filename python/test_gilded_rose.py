@@ -42,7 +42,8 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         for item in range(len(items)):
-            self.assertTrue(50 >= items[item].quality)
+            self.assertTrue(50 >= items[item].quality,
+                            f"Item failing {items[item].name}")
 
     def test_representation_of_item(self):
         item = Item("Name", 50, 60)
