@@ -31,24 +31,31 @@ class GildedRose(object):
     def update_aged_brie(self, item):
         if item.sell_in < 0:
             item.quality += 2
-        else:
-            item.quality += 1
-        return item.quality
+            return item.quality
+
+    def update_backstage(self, item):
+        if item.sell_in <= 0:
+            item.quality = 0
+            return item.quality
+        if item.sell_in < 6:
+            item.quality += 3
+            return item.quality
+        if item.sell_in < 11:
+            item.quality += 2
+            return item.quality
 
     def update_quality(self):
 
         for item in self.items:
+            if item.name == 'Aged Brie':
+                return self.update_aged_brie(item)
+            if item.name == 'Backstage passes to a TAFKAL80ETC concert':
+                return self.update_backstage(item)
             if item.sell_in < 1 or item.quality == 50 and item.name != "Sulfuras, Hand of Ragnaros":
-                self.update_min_max_quality(item)
-            elif item.name in ['+5 Dexterity Vest', "Elixir of the Mongoose", "Conjured Mana Cake"]:
+                return self.update_min_max_quality(item)
+            if item.name in ['+5 Dexterity Vest', "Elixir of the Mongoose", "Conjured Mana Cake"]:
                 self.decrease_sell_in(item)
                 self.decrease_quality(item)
-            else:
-                if item.name == 'Aged Brie':
-                    self.update_aged_brie(item)
-
-    def update_item(self):
-        print('ok')
 
 
 class Item:
