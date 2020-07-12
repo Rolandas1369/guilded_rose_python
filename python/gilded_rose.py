@@ -89,7 +89,7 @@ class GildedRose:
                 self.update_sulfuras(item)
             if item.name in ['+5 Dexterity Vest', "Elixir of the Mongoose"]:
                 self.decrease_sell_in(item)
-                self.decrease_quality(item)
+                self.decrease_quality_check_boundaries(item)
             if (item.sell_in < 1 or item.quality == 50) and item.name != "Sulfuras, Hand of Ragnaros":
                 self.update_min_max_quality(item)
 
