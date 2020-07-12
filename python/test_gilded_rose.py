@@ -17,7 +17,7 @@ class GildedRoseTest(unittest.TestCase):
             self.assertEqual(44, items[item].quality)
 
     def test_sell_in_decreases_by_1(self):
-        names_list = ['+5 Dexterity Vest',
+        names_list = ['+5 Dexterity Vest', "Sulfuras, Hand of Ragnaros",
                       "Elixir of the Mongoose", "Conjured Mana Cake"]
         items = [Item(name, 45, 45) for name in names_list]
         gilded_rose = GildedRose(items)
@@ -28,7 +28,7 @@ class GildedRoseTest(unittest.TestCase):
 
     def test_negative_sell_in_returns_0(self):
         names_list = ['+5 Dexterity Vest', "Elixir of the Mongoose",
-                      "Sulfuras, Hand of Ragnaros", "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
+                      "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
         items = [Item(name, -1, 0) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
@@ -37,7 +37,7 @@ class GildedRoseTest(unittest.TestCase):
 
     def test_quality_cant_increase_more_than_50(self):
         names_list = ['+5 Dexterity Vest', 'Aged Brie', "Elixir of the Mongoose",
-                      "Sulfuras, Hand of Ragnaros", "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
+                      "Backstage passes to a TAFKAL80ETC concert", "Conjured Mana Cake"]
         items = [Item(name, 50, 50) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
@@ -77,7 +77,13 @@ class GildedRoseTest(unittest.TestCase):
         items = [Item("Conjured Mana Cake", 10, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertAlmostEqual(items[0].quality, 8)
+        self.assertEqual(items[0].quality, 8)
+
+    def test_sulfuras_quality_doesnt_change(self):
+        items = [Item("Sulfuras, Hand of Ragnaros", -1, 80)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(items[0].quality, 80)
 
 
 

@@ -53,12 +53,16 @@ class GildedRose():
             return item.quality
         else:
             return item.quality
-            
+
     def update_conjured(self, item):
         """Updates conjered items sell in and quality"""
         item.quality -= 2
         item.sell_in -= 1
         return item.quality, item.sell_in
+    
+    def update_sulfuras(self, item):
+        item.sell_in -= 1
+        return item.sell_in
 
     def update_quality(self):
         """Updates quality and sell in of provided item"""
@@ -69,10 +73,12 @@ class GildedRose():
                 self.update_backstage(item)
             if item.name == "Conjured Mana Cake":
                 self.update_conjured(item)
+            if item.name == "Sulfuras, Hand of Ragnaros":
+                self.update_sulfuras(item)
             if item.name in ['+5 Dexterity Vest', "Elixir of the Mongoose"]:
                 self.decrease_sell_in(item)
                 self.decrease_quality(item)
-            if item.sell_in < 1 or item.quality == 50 and item.name != "Sulfuras, Hand of Ragnaros":
+            if (item.sell_in < 1 or item.quality == 50) and item.name != "Sulfuras, Hand of Ragnaros":
                 self.update_min_max_quality(item)
 
 class Item:
