@@ -33,7 +33,7 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         for item in range(len(items)):
-            self.assertEqual(0, items[item].quality)
+            self.assertEqual(0, items[item].quality, f"Testing item {items[item].name}")
 
     def test_quality_cant_increase_more_than_50(self):
         names_list = ['+5 Dexterity Vest', 'Aged Brie', "Elixir of the Mongoose",
@@ -48,12 +48,6 @@ class GildedRoseTest(unittest.TestCase):
     def test_representation_of_item(self):
         item = Item("Name", 50, 60)
         self.assertEqual(str(item), "Name, 50, 60")
-
-    # def test_backstage_pass(self):
-    #     items = [Item("Backstage passes to a TAFKAL80ETC concert", 10, 10)]
-    #     gilded_rose = GildedRose(items)
-    #     gilded_rose.update_quality()
-    #     self.assertEqual(12, items[0].quality)
 
     def test_backstage_value_at_day_below_eleven(self):
         items = [Item("Backstage passes to a TAFKAL80ETC concert", 10, 10)]
