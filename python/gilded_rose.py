@@ -8,6 +8,7 @@
 # 6. Most of code are in functions, not fully tested functionality,
 # need improvement to 100% test coverage
 # 7. After some code refactoring, and test are 100% passing can add new feature
+# 8. GuildedRose class doesnt represent anything, it will be better to remove it and live only item class
 
 
 class Item:
@@ -33,8 +34,8 @@ class GildedRose:
             item.quality = 0
         return item.quality
 
-    def decrease_quality(self, item):
-        """Decreases item value by 1"""
+    def decrease_quality_check_boundaries(self, item):
+        """Decreases item value by 1, check for min max values"""
         self.update_min_max_quality(item)
         item.quality -= 1
         return item.quality
