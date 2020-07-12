@@ -44,6 +44,10 @@ class GildedRose(object):
         if item.sell_in < 11:
             item.quality += 2
             return item.quality
+    
+    def update_conjured(self, item):
+        item.quality -= 2
+        return item.quality
 
     def update_quality(self):
 
@@ -52,7 +56,9 @@ class GildedRose(object):
                 self.update_aged_brie(item)
             if item.name == 'Backstage passes to a TAFKAL80ETC concert':
                 self.update_backstage(item)
-            if item.name in ['+5 Dexterity Vest', "Elixir of the Mongoose", "Conjured Mana Cake"]: 
+            if item.name == "Conjured Mana Cake":
+                self.update_conjured(item)
+            if item.name in ['+5 Dexterity Vest', "Elixir of the Mongoose"]: 
                 self.decrease_sell_in(item) 
                 self.decrease_quality(item) 
             if item.sell_in < 1 or item.quality == 50 and item.name != "Sulfuras, Hand of Ragnaros":
