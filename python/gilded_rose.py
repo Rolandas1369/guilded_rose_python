@@ -47,7 +47,8 @@ class GildedRose(object):
     
     def update_conjured(self, item):
         item.quality -= 2
-        return item.quality
+        item.sell_in -= 1
+        return item.quality, item.sell_in
 
     def update_quality(self):
 

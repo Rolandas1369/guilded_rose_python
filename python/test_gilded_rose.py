@@ -18,13 +18,13 @@ class GildedRoseTest(unittest.TestCase):
 
     def test_sell_in_decreases_by_1(self):
         names_list = ['+5 Dexterity Vest',
-                      "Elixir of the Mongoose"]
+                      "Elixir of the Mongoose", "Conjured Mana Cake"]
         items = [Item(name, 45, 45) for name in names_list]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         for item in range(len(items)):
             self.assertEqual(44, items[item].sell_in,
-                             f"Item failing {items[0].name}")
+                             f"Item failing {items[item].name}")
 
     def test_negative_sell_in_returns_0(self):
         names_list = ['+5 Dexterity Vest', "Elixir of the Mongoose",
