@@ -59,8 +59,9 @@ class GildedRose():
         item.quality -= 2
         item.sell_in -= 1
         return item.quality, item.sell_in
-    
+
     def update_sulfuras(self, item):
+        "Update sulfuras sell in"
         item.sell_in -= 1
         return item.sell_in
 
