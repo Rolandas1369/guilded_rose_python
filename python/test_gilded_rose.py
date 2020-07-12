@@ -72,6 +72,13 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(items[0].quality, 12)
+    
+    def test_cojured_item_quality_decreases_by_two(self):
+        items = [Item("Conjured Mana Cake", 10, 10)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertAlmostEqual(items[0].quality, 8)
+
 
 
 if __name__ == '__main__':
