@@ -10,13 +10,22 @@
 # 7. After some code refactoring, and test are 100% passing can add new feature
 
 
+class Item:
+    def __init__(self, name, sell_in, quality):
+        self.name = name
+        self.sell_in = sell_in
+        self.quality = quality
+
+    def __repr__(self):
+        return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
+
+
 class GildedRose:
 
     def __init__(self, items):
         self.items = items
 
-    @staticmethod
-    def update_min_max_quality(item):
+    def update_min_max_quality(self, item):
         """Updates min and max values of items"""
         if item.quality >= 50:
             item.quality = 50
@@ -30,21 +39,18 @@ class GildedRose:
         item.quality -= 1
         return item.quality
 
-    @staticmethod
-    def decrease_sell_in(item):
+    def decrease_sell_in(self, item):
         """Decreases item sell in by 1"""
         item.sell_in -= 1
         return item.sell_in
 
-    @staticmethod
-    def update_aged_brie(item):
+    def update_aged_brie(self, item):
         """Updates Aged Brie sell in and quality"""
         if item.sell_in < 0:
             item.quality += 2
         return item.quality
 
-    @staticmethod
-    def update_backstage(item):
+    def update_backstage(self, item):
         """Updates Backstage quality"""
         if item.sell_in <= 0:
             item.quality = 0
@@ -58,15 +64,13 @@ class GildedRose:
         else:
             return item.quality
 
-    @staticmethod
-    def update_conjured(item):
+    def update_conjured(self, item):
         """Updates conjured items sell in and quality"""
         item.quality -= 2
         item.sell_in -= 1
         return item.quality, item.sell_in
 
-    @staticmethod
-    def update_sulfuras(item):
+    def update_sulfuras(self, item):
         """Update sulfuras sell in"""
         item.sell_in -= 1
         return item.sell_in
@@ -89,11 +93,4 @@ class GildedRose:
                 self.update_min_max_quality(item)
 
 
-class Item:
-    def __init__(self, name, sell_in, quality):
-        self.name = name
-        self.sell_in = sell_in
-        self.quality = quality
 
-    def __repr__(self):
-        return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
