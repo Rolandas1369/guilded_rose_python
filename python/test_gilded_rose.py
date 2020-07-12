@@ -7,7 +7,8 @@ from gilded_rose import Item, GildedRose
 
 class GildedRoseTest(unittest.TestCase):
 
-    def create_update_items(self, items_list, sell_in, quality):
+    @staticmethod
+    def create_update_items(items_list, sell_in, quality):
         """Creates items with sell in and quality from provided names list"""
         items = [Item(items_list[i], sell_in, quality) for i in range(len(items_list))] 
         gilded_rose = GildedRose(items)

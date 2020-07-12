@@ -10,12 +10,13 @@
 # 7. After some code refactoring, and test are 100% passing can add new feature
 
 
-class GildedRose():
+class GildedRose:
 
     def __init__(self, items):
         self.items = items
 
-    def update_min_max_quality(self, item):
+    @staticmethod
+    def update_min_max_quality(item):
         """Updates min and max values of items"""
         if item.quality >= 50:
             item.quality = 50
@@ -29,18 +30,21 @@ class GildedRose():
         item.quality -= 1
         return item.quality
 
-    def decrease_sell_in(self, item):
+    @staticmethod
+    def decrease_sell_in(item):
         """Decreases item sell in by 1"""
         item.sell_in -= 1
         return item.sell_in
 
-    def update_aged_brie(self, item):
+    @staticmethod
+    def update_aged_brie(item):
         """Updates Aged Brie sell in and quality"""
         if item.sell_in < 0:
             item.quality += 2
         return item.quality
 
-    def update_backstage(self, item):
+    @staticmethod
+    def update_backstage(item):
         """Updates Backstage quality"""
         if item.sell_in <= 0:
             item.quality = 0
@@ -54,14 +58,16 @@ class GildedRose():
         else:
             return item.quality
 
-    def update_conjured(self, item):
-        """Updates conjered items sell in and quality"""
+    @staticmethod
+    def update_conjured(item):
+        """Updates conjured items sell in and quality"""
         item.quality -= 2
         item.sell_in -= 1
         return item.quality, item.sell_in
 
-    def update_sulfuras(self, item):
-        "Update sulfuras sell in"
+    @staticmethod
+    def update_sulfuras(item):
+        """Update sulfuras sell in"""
         item.sell_in -= 1
         return item.sell_in
 
@@ -81,6 +87,7 @@ class GildedRose():
                 self.decrease_quality(item)
             if (item.sell_in < 1 or item.quality == 50) and item.name != "Sulfuras, Hand of Ragnaros":
                 self.update_min_max_quality(item)
+
 
 class Item:
     def __init__(self, name, sell_in, quality):
