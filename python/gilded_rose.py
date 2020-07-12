@@ -8,7 +8,7 @@
 # 6. Most of code are in functions, not fully tested functionality,
 # need improvement to 100% test coverage
 # 7. After some code refactoring, and test are 100% passing can add new feature
-# 8. GuildedRose class doesnt represent anything, it will be better to remove it and live only item class
+# 8. GuildedRose class doesnt represent anything, it will be better to remove it and leave only item class
 
 
 class Item:
